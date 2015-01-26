@@ -13,7 +13,7 @@
    {
    	   $doc = new DocumentoDAO();
    	   $doc->editar($_SESSION['sobsCod'], date("y/m/d"), $_FILES['documento']['name'], $_FILES['documento']['tmp_name']);
-   	   echo "<script> alert('Sobreescrito com sucesso!') </script>";
+   	   echo "<script> alert('Sobreescrito com sucesso! RECARREGUE A PAGINA DE DOCUMENTOS PARA VER AS ALTERAÇÕES!') </script>";
    }
    
 
@@ -27,9 +27,9 @@
 		<meta charset="UTF-8"/>
 	    <link rel="stylesheet" type="text/css" href="stylesheet.css"/>
 	</head>
-	<body>
+	<body background-color="white">
 					<div>
-					<h2>Sobrescrever documento <?php if(isset($_GET['nome'])) { echo ": " . $_GET['nome']; } ?></h2>
+					<h2>Sobrescrever : <?php if(isset($_GET['nome'])) { echo $_GET['nome']; } ?></h2>
 					<form enctype="multipart/form-data" action="./sobs.php" method="POST">
 					<table  id="tabela3" style="text-align: right"  CELLPADDING="10" align="center">
 					<tr>

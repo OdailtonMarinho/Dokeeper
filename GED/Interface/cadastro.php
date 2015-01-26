@@ -29,8 +29,8 @@
 			<form action="EviarUsuario.php" method="POST">
 			
 			<tr><td><label for="nome"><h3>Nome: </label></h3></td><td><input id="nome" name="nome" type="text"></h3></td></tr>
-			<tr><td><label for="cpf"><h3>Cpf: </td><td><input id="cpf" name="cpf" type="text"></h3></label></tr>
-			<tr><td><label for="email"><h3>Nome de Usuário: </td><td><input id="email" name="email" type="text"> </h3></label></tr>
+			<tr><td><label for="cpf"><h3>Cpf: </td><td><input id="cpf" name="cpf" type="number" maxlength="11"></h3></label></tr>
+			<tr><td><label for="email"><h3>Nome de Usuário: </td><td><input id="email" name="email" type="email"> </h3></label></tr>
 			<tr><td><label for="senha"><h3>Senha: </td><td><input id="senha" name="senha" value="" type="password"></h3></label></tr>
 			<tr><td><label for="repetirSenha"><h3>Repita a Senha</td><td><input id="repetirSenha" name="repetirSenha" type="password"></h3></label></tr>
 			<tr><td><label for="niveis"><h3>Selicionar Nivel: </h3></label></td><td><select id="niveis" name="nivel">

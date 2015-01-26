@@ -62,6 +62,14 @@
 	<link rel="shortcut icon" href="imagens/favicon.png" type="image/x-icon">
 	<script src="http://code.jquery.com/jquery-latest.min.js" type="text/javascript"></script>
         <script src="script.js"></script>
+        <link href="shadowbox/shadowbox.css" rel="stylesheet" type="text/css" />
+		<script type="text/javascript" src="shadowbox/shadowbox.js"></script>
+		<script type="text/javascript">
+			Shadowbox.init({
+				language: 'pt',
+				player: ['img', 'html', 'swf']
+			});
+		</script>
 </head>
 <body>
 	<div id="corpo2">
@@ -114,6 +122,7 @@
 			<div class="panel3">
 					<h2>Enviar documento</h2>
 					<form enctype="multipart/form-data" action="./mandarPoDB.php" method="POST">
+					<input type="hidden" name="MAX_FILE_SIZE" value="100000000" />
 					<table  id="tabela3" style="text-align: right"  CELLPADDING="10" align="center">
 					<tr>
 						<td colspan="2">
@@ -178,7 +187,7 @@
                  	           <td><a href='./administrador.php?excluir=".$linha['cod']."'>Excluir Documento</a></td>
                  	           <td>'$linha[datinha]'</td>
                  	           <td><a href='./permissao.php?cod=".$linha['cod']."'>Alterar Permissão</a></td>
-                 	           <td><a href='sobs.php?cod=$cod&nome=".$linha['nome']."'>Sobrescrever Documento</a></td>
+                 	           <td><a title='Sobrescrever' href='sobs.php?cod=$cod&nome=".$linha['nome']."' rel='shadowbox;width=600;height=300'>Sobrescrever Documento</a></td>
                  	       </tr>";
                  }
 			 ?>
@@ -193,7 +202,7 @@
 			<a href="editarUsuario.php"><div class="menuadm"><img src="imagens/editarUsuario.png" title="Editar usuários" width="65px" height="65px"/></div></a>
 			<div class="menuadm"><img src="imagens/editar.png" title="Cadastrar níveis" width="65px" height="65px" id="cadnivel"/></div>
 			<div class="menuadm"><img src="imagens/editarniveis.png" title="Editar níveis" width="65px" height="65px" id="editnivel"/></div>
-			<a href="requisicao.php"><div class="menuadm"><img src="imagens/req.png" title="Enviar requerimento" width="65px" height="65x" id="req"/></div></a>
+			<a href="requis.php"><div class="menuadm"><img src="imagens/req.png" title="Enviar requerimento" width="65px" height="65x" id="req"/></div></a>
 
 		</div>
 </body>

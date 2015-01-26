@@ -7,6 +7,28 @@
 	<link rel="shortcut icon" href="imagens/favicon.png" type="image/x-icon">
 	<script src="http://code.jquery.com/jquery-latest.min.js" type="text/javascript"></script>
         <script src="script.js"></script>
+        <script>
+			/*function formatar(mascara, documento){
+  				var i = documento.value.length;
+  				var saida = mascara.substring(0,1);
+  				var texto = mascara.substring(i)
+  
+  				if (texto.substring(0,1) != saida){
+            		documento.value += texto.substring(0,1);
+  				}
+  
+			}*/
+</script>
+					<script language='JavaScript'>
+			function SomenteNumero(e){
+			var tecla=(window.event)?event.keyCode:e.which;
+			if((tecla>47 && tecla<58)) return true;
+			else{
+			if (tecla==8 || tecla==0) return true;
+			else return false;
+			}
+			}
+			</script>
 </head>
 <body>
 	<div id="corpo3">
@@ -20,16 +42,16 @@
 			<form action="./EviarUsuario.php" method="POST">
 			<table>
 			<tr>
-			   <td><h3>Insira seu nome: </td><td><input name="nome" type="text"></h3></td>
+			   <td><h3>Insira seu nome: </td><td><input name="nome" type="text" minlength="8"></h3></td>
 			</tr>
 			<tr>
-			   <td><h3>Insira seu CPF: </td><td><input name="cpf" type="number"></h3></td>
+			   <td><h3>Insira seu CPF: </td><td><input name="cpf" type="text" maxlength="11" onkeypress='return SomenteNumero(event)' ></h3><i> Insira o cpf sem pontos e sem o hifen</i></td>
 			</tr>
 			<tr>
 			   <td><h3>Insira seu email: </td><td><input name="email" type="email"> </h3></td>
 			</tr>
 			<tr>
-			   <td><h3>Insira sua senha: </td><td><input name="senha" type="password"></h3>O tamanho mínimo da senha é de 6 caracteres</td>
+			   <td><h3>Insira sua senha: </td><td><input name="senha" type="password"></h3><i> O tamanho mínimo da senha é de 6 caracteres</i></td>
 			</tr>
 			<tr>
 			   <td><h3>Repita sua senha: </td><td><input name="repetirSenha" type="password"></h3></td>

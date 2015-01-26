@@ -12,6 +12,12 @@
      die("<h1>O tamanho desse arquivo ultrapassa o permitido. Tente novamente</h1><br>");
   }
 
+  if(!isset($_FILES["documento"]['type']))
+  {
+     if($_SESSION['nivel'] == 1) { echo "<a href='./administrador.php'>Voltar</a>"; }  else { echo  "<a href='./usuario.php'>Voltar</a>"; }
+     die("<h1>Campo de escolha do arquivo vazio. Tente novamente</h1><br>");
+  }
+
   $nome = $_FILES["documento"]["name"];
   $tmpNome = $_FILES["documento"]["tmp_name"];
   $data = date("y/m/d");

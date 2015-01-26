@@ -5,6 +5,7 @@
 @include("..\DAO\DB.php");
 
 session_start();
+echo "<meta charset='UTF-8'>";
 
 $perm = new PermissaoDAO();
 $usu = new UsuarioDAO();
@@ -40,3 +41,7 @@ for($i = 0; $i < $_POST['perms']; $i++)
       }
    }
 }
+
+echo "<h1>Permissão alterada com sucesso</h1><br><a href='permissao.php'><li>Voltar</li></a>";
+
+?>

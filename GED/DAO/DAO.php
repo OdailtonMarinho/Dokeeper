@@ -187,7 +187,7 @@ class DocumentoDAO {
 class PermissaoDAO {
 	function inserir($Fk_Doc, $Fk_Usu, $nome) {
 		$query = mysql_query("insert into permissao(nome, cpf, cod) values('$nome','$Fk_Usu', '$Fk_Doc');");
-		echo "insert into permissao(nome, cpf, cod) values('$nome','$Fk_Usu', '$Fk_Doc');";
+		//echo "insert into permissao(nome, cpf, cod) values('$nome','$Fk_Usu', '$Fk_Doc');";
 		erro($query);
 	}
 
@@ -266,7 +266,7 @@ class SolicitacaoDAO
 
     function excluir($id)
 	{
-		$q = mysql_query("delete from soclicitacao where id = '$id';");
+		$q = mysql_query("delete from solicitacao where id = '$id';");
 		if($q) return true;
 		else return false;
 	}
@@ -275,9 +275,9 @@ class SolicitacaoDAO
 	{
 		$usu = "";
 		if($cpf != "nulo" && $cpf != "") { $usu .= " and solicitacao.cpf = '$cpf'"; }
-		if($data != "") { $usu .= " and dat = '$data'"; }
+		if($data != "") { $usu .= " and DATE_FORMAT(dat, '%d/%m/%Y') = '$data'"; }
 		$q = mysql_query("select *, usuario.cpf as 'usuCpf', solicitacao.cpf as 'solCpf', DATE_FORMAT(dat, '%d/%m/%Y') as datinha from solicitacao, usuario where solicitacao.cpf = usuario.cpf $usu;");
-		echo "select *, usuario.cpf as 'usuCpf', solicitacao.cpf as 'solCpf' from solicitacao, usuario where solicitacao.cpf = usuario.cpf $usu;";
+		//echo "select *, usuario.cpf as 'usuCpf', solicitacao.cpf as 'solCpf', DATE_FORMAT(dat, '%d/%m/%Y') as datinha from solicitacao, usuario where solicitacao.cpf = usuario.cpf $usu;";
 		if($q) return $q;
 		else return false;
 	}
