@@ -20,7 +20,7 @@
 
    if(isset($_SESSION['cadastrado']) && $_SESSION['cadastrado'] == 1)
    {
-   	   echo "<a href='./administrador.php'><script type='text/javascript'>alert('Nivel cadastrado com sucesso!')</script></a>"; 
+   	   echo "<a href='./administrador.php'><script type='text/javascript'>alert('Grupo cadastrado com sucesso!')</script></a>"; 
    	   $_SESSION['cadastrado'] = 2;
    	   unset($_SESSION['cadastrado']);
    }
