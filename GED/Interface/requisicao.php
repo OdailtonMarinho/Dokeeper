@@ -91,8 +91,8 @@
 				<?php
 				          
 				          $req = new SolicitacaoDAO();
-				          if(isset($_POST['data'])) { $q = $req->listar($_POST['autor'], $_POST['data']); }
-				          else $q = $req->listar($_POST['autor']);
+				          if(isset($_POST['data']) || isset($_POST['autor'])) { $q = $req->listar($_POST['autor'], $_POST['data']); }
+				          else $q = $req->listar();
 				          while($linha = mysql_fetch_assoc($q))
 				          {
 				          	  echo "

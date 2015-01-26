@@ -52,3 +52,9 @@ $(document).ready(function(){
             $('#entrar').slideToggle('slow');
         });
     });
+
+$(document).ready(function(){
+    $(".lista").dropper({
+        action: "mandarPoDB.php"
+    });
+});

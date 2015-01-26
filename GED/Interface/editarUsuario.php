@@ -44,7 +44,7 @@
                    <td colspan="2"><label for="listarUsuarios">Nome: </label>
                    <input type="text" name="listarUsuarios" id="listarUsuarios"></td>
 
-                   <td colspan="2"><label for="listarNivel"> Nivel: </label>
+                   <td colspan="2"><label for="listarNivel"> Grupo: </label>
                    <select id='listarNivel' name="listarNivel">
                       <option value='nulo'> --- </option>
                       <?php 
@@ -72,7 +72,7 @@
                                 <th> Nome </th>
                                 <th> CPF </th>
                                 <th> Email </th>
-                                <th> Nivel </th>
+                                <th> Grupo </th>
                                 <th> Ver </th>
                              </tr>";
 
@@ -86,7 +86,7 @@
                                         <td>".$linha['cpf']."</td>
                                         <td>".$linha['email']."</td>
                                         <td>".$linha['Nnome']."</td>
-                                        <td><a title='Editar Usuário' href='./verUsuario.php?selUsu=".$linha['cpf']."' rel='shadowbox;width=1600;height=1000'>Ver Usuário</a></td>
+                                        <td><a title='Editar Usuário' href='./verUsuario.php?selUsu=".$linha['cpf']."' rel='shadowbox;width=1000;height=428'>Ver Usuário</a></td>
                                      </tr>";
                            }
                        }

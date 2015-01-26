@@ -3,8 +3,6 @@
 <?php
 
 session_start();
-if(isset($_SESSION['cpf']) && $_SESSION['nivel'] == 1){ header("Location: ./administrador.php"); }
-elseif(isset($_SESSION['cpf']) && $_SESSION['nivel'] != 1){ header("Location: ./usuario.php"); }
 
 ?>
 
@@ -27,7 +25,7 @@ elseif(isset($_SESSION['cpf']) && $_SESSION['nivel'] != 1){ header("Location: ./
 			<form action="./login.php" method="POST">
 				<div id="login"><h4>Faça login</h4></div>
 				<div id="user">
-					<div class="interno1">Usuário:</div>
+					<div class="interno1">Email:</div>
 					<div class="interno"><input type="email" name="nome" size="18"/></div>
 					<div class="interno1">Senha:</div>
 					<div class="interno"><input type="password" name="senha" size="18"/></div>

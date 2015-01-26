@@ -25,8 +25,8 @@
   for($i = 0; $i < 8; $i++)
   {
 	  $c = rand(32, 126);
-	  if(($c > 57 && $c < 64) || $c == 92 || $c == 42 || $c == 34 || $c == 124 || $c == 47 || $c == 35 || $c == 38 || $c == 43){ continue; }
-	  else { $cod .= chr($c); }
+	  if(($c > 47 && $c < 58) || ($c > 65 && $c < 90) || ($c > 97 && $c < 122)){ $cod .= chr($c); }
+	  else { continue; }
   }
   $autor = $_SESSION['cpf'];
   $inserir = new DocumentoDAO();

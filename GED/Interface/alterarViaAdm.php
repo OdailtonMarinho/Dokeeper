@@ -75,15 +75,13 @@
 
           }
       }
-
-      if($_SESSION['nivel'] == 1) { header("Location: ./administrador.php"); }
-      else header("Location: ./usuario.php");
   }
 
-  else
+  if(isset($_POST['viaAdm'])) { echo "<script>parent.location.reload();parent.Shadowbox.close();</script>"; }
+  else 
   {
-      if($_SESSION['nivel'] == 1) { header("Location: ./administrador.php"); }
-      else header("Location: ./usuario.php");
+      if($_SESSION['nivel'] != 1) { header("Location: usuario.php"); }
+      else { header("Location: administrador.php"); }
   }
 
 //}

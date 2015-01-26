@@ -121,7 +121,7 @@ countfield.value = maxlimit - field.value.length;
 		      	<th>  Excluir  </th>
 		      	<th>  Data  </th>
 		      	<th> Sobrescrever </th>
-		      	<th> Permissão </th>
+		      	<th> Compartilhar </th>
 		      </tr>
 
             <?php 
@@ -138,7 +138,7 @@ countfield.value = maxlimit - field.value.length;
                  	           <td><a href='./usuario.php?excluir=".$linha['cod']."'>Excluir Documento</a></td>
                  	           <td>'$linha[datinha]'</td>
                  	           <td><a title='Sobrescrever' href='sobs.php?cod=".$linha['cod']."&nome=".$linha['nome']."' rel='shadowbox;width=600;height=300'>Sobrescrever Documento</a></td>";
-                 	           echo "<td><a href='./permissao.php?cod=".$linha['cod']."'>Alterar Permissão</a></td>"; 
+                 	           echo "<td><a href='./permissao.php?cod=".$linha['cod']."'>Compartilhar Documento</a></td>"; 
                  	       echo "</tr>";
 
                  }
@@ -149,7 +149,7 @@ countfield.value = maxlimit - field.value.length;
 			<div id="menuuser">
 			<div class="menuuser"><img src="imagens/adddoc2.png" title="Adicionar documentos" width="65px" height="65px" id="adddoc"/></div>
 			<a href="pesquisa.php"><div class="menuuser"><img src="imagens/pesquisar2.png" title="Pesquisar" width="65px" height="65px"/></div></a>
-			<div class="menuuser"><img src="imagens/req.png" title="Fazer requisição" width="65px" height="65px" id="req"/></div>
+			<div class="menuuser"><img src="imagens/req.png" title="Enviar requisição" width="65px" height="65px" id="req"/></div>
 		</div>
 </body>
 </html>

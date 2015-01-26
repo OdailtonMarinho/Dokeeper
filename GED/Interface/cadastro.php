@@ -33,7 +33,7 @@
 			<tr><td><label for="email"><h3>Nome de Usuário: </td><td><input id="email" name="email" type="email"> </h3></label></tr>
 			<tr><td><label for="senha"><h3>Senha: </td><td><input id="senha" name="senha" value="" type="password"></h3></label></tr>
 			<tr><td><label for="repetirSenha"><h3>Repita a Senha</td><td><input id="repetirSenha" name="repetirSenha" type="password"></h3></label></tr>
-			<tr><td><label for="niveis"><h3>Selicionar Nivel: </h3></label></td><td><select id="niveis" name="nivel">
+			<tr><td><label for="niveis"><h3>Selecionar grupo: </h3></label></td><td><select id="niveis" name="nivel">
 				<option value="nulo"> --- </option>
 				<?php 
 

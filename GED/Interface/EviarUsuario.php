@@ -66,13 +66,14 @@ echo "<meta charset='UTF-8'/>";
 
 			if(isset($_POST['auto']))
 			{
+				echo "marotagem".$_SESSION['cpf'];
 				$_SESSION['cpf'] = $_POST['cpf'];
 				$_SESSION['nome'] = $_POST['nome'];
 				$_SESSION['nivel'] = $_POST['nivel'];
-				header("Location : usuario.php");
+				header("Location: usuario.php");
 			}
 
-		else { header("Location: administrador.php"); }
+		    else { header("Location: administrador.php"); }
 		}
 
 		else die("<h2>Senhas Diferentes. Tente novamente</h2>");

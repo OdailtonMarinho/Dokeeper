@@ -29,7 +29,6 @@
 <html>
 
 <head>
-	<title>Editar permissões</title>
 	<meta charset="UTF-8"/>
 	<link rel="stylesheet" type="text/css" href="stylesheet.css"/>
 	<link rel="shortcut icon" href="imagens/favicon.png" type="image/x-icon">
@@ -38,24 +37,16 @@
 </head>
 
 <body>
-
-	<div id="corpo3">
-		<div id="cabecalho">
-			<div class="welcome"><h3>Olá, <?php echo $_SESSION['nome'] ?>.</h3></div>
-			<a <?php if($_SESSION['nivel'] == 1) { echo "href='./administrador.php'"; }  else { echo  "href='./usuario.php'"; } ?>> <div class="tools" id="lix"><img src="imagens/voltar.png" title="Voltar" height="60px" width="60px"/></div></a>
-		</div>
-			
-			<h2>Editar permissões de documentos</h2>
 				<table id="tabelaPerm" style="text-align: left"  CELLPADDING="10" align="left">
 					<tr>
 						<td colspan="2"><?php echo $_SESSION['doc']; ?></td>
 					</tr>
 
 					<tr>
-						<td colspan="2"><a href="./permissao.php?perms='$_SESSION[cod]'">Listar Permissões desse documento</a></td>
+						<td colspan="2"><a href="./permissaoViaAdm.php?perms='$_SESSION[cod]'">Listar Permissões desse documento</a></td>
 					</tr>
 					
-					<form action="./permissao.php" method="GET">
+					<form action="./permissaoViaAdm.php" method="GET">
 					<tr>
 						<td>Nome: <br>
 						<input type="text" name="nome"/> <input type="submit" value="Buscar" id="entrar"/></td>
@@ -63,9 +54,9 @@
 					</form>
 
 
-					<form action="./permissao.php" method="GET">
+					<form action="./permissaoViaAdm.php" method="GET">
 					<tr>
-						<td>Grupos: <br>
+						<td>Níveis: <br>
 							<input type="text" name="nivel"/> <input type="submit" value="Buscar" id="entrar"/></td>
 					</tr>
 					</form>
@@ -83,6 +74,7 @@
 					   {
 					   	   
 					   	   	 echo "<form action='confirmarPerm.php' method='POST'>";
+					   	   	 echo "<input type='hidden' name='viaAdm' value='1'/>";
 					   	   	 echo "<tr>
 				      					<th> Nome </th>
 				      					<th> Email </th>
@@ -110,6 +102,7 @@
 					   elseif(isset($_GET['nivel']) && !isset($_GET['nome']) && !isset($_GET['perms']))
 					   {
 					   	   echo "<form action='confirmarPermNivel.php' method='POST'>";
+					   	   echo "<input type='hidden' name='viaAdm' value='1'/>";
 					   	   echo "	<tr>
 				      					<th> Nome </th>
 				      					<th colspan='2'> Poderá </th>
@@ -150,18 +143,17 @@
 					   	               <td>".$linha['email']."</td>
 					   	               <td>".$linha['perNome']."</td>
 					   	               <td>".$linha['nivNome']."</td>
-					   	               <td><a href='permissao.php?excluir=".$linha['perId']."'> Excluir Permissão </a></td>
+					   	               <td><a href='permissaoViaAdm.php?excluir=".$linha['perId']."'> Excluir Permissão </a></td>
 					   	            </tr>";
 					   	   }
 					   }
 
 					?>
 				   </table>
-				</div>
 				<?php if(isset($_GET['nivel']) || isset($_GET['nome'])) { echo "<input type='submit' value='Confirmar permissao' id='entrar'>"; } ?>
 			</form>
-		</div>
-</body>
+			</div>
+
 </body>
 
 </html>

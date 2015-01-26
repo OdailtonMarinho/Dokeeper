@@ -43,7 +43,7 @@
 
    	   elseif($_GET['idNivel'] == "nulo")
    	   {
-   	   	  echo "<script type='text/javascript'>alert('Impossivel alterar. Selecione um nível!')</script>";
+   	   	  echo "<script type='text/javascript'>alert('Impossivel alterar. Selecione um grupo!')</script>";
    	   }
 
    	   else echo "<script type='text/javascript'>alert('Impossivel alterar. Novo nome vazio!')</script>";
@@ -86,11 +86,11 @@
 		</div>
 		<h2>Seus documentos</h2>
 			<div class="panel4">
-					<h2>Editar níveis</h2>
+					<h2>Editar Grupo</h2>
 					<form action="./administrador.php" method="GET">
 					<table  id="tabela2" style="text-align: right"  CELLPADDING="10" >
 						<tr>
-							<td>Selecionar nível:</td>
+							<td>Selecionar grupo:</td>
 							<td>
 								<select name="idNivel">
 									<option value="nulo">-------------</option>
@@ -138,7 +138,7 @@
 				</div>
 
 		<div class="panel2">
-					<h2>Cadastrar níveis</h2>
+					<h2>Cadastrar Grupo</h2>
 					<form action="./cadastrarNivel.php" method="POST">
 					<table  id="tabela2" style="text-align: right"  CELLPADDING="10" >
 						<tr>
@@ -168,7 +168,7 @@
 		      	<th>  Tipo  </th>
 		      	<th>  Excluir  </th>
 		      	<th>  Data  </th>
-		      	<th> Permissão </th>
+		      	<th> Compartilhar </th>
 		      	<th> Sobrescrever </th>
 		      </tr>
 
@@ -186,7 +186,7 @@
                  	           <td>".$tipo[count($tipo) - 1]."</td>
                  	           <td><a href='./administrador.php?excluir=".$linha['cod']."'>Excluir Documento</a></td>
                  	           <td>'$linha[datinha]'</td>
-                 	           <td><a href='./permissao.php?cod=".$linha['cod']."'>Alterar Permissão</a></td>
+                 	           <td><a href='./permissao.php?cod=".$linha['cod']."'>Compartilhar Documento</a></td>
                  	           <td><a title='Sobrescrever' href='sobs.php?cod=$cod&nome=".$linha['nome']."' rel='shadowbox;width=600;height=300'>Sobrescrever Documento</a></td>
                  	       </tr>";
                  }
@@ -200,9 +200,9 @@
 			<a href="pesquisa.php"><div class="menuuser"><img src="imagens/pesquisar.png" title="Pesquisar" width="65px" height="65px"/></div></a>
 			<a href="cadastro.php"><div class="menuadm"><img src="imagens/cadastro.png" title="Cadastrar usuários" width="65px" height="65px"/></div></a>
 			<a href="editarUsuario.php"><div class="menuadm"><img src="imagens/editarUsuario.png" title="Editar usuários" width="65px" height="65px"/></div></a>
-			<div class="menuadm"><img src="imagens/editar.png" title="Cadastrar níveis" width="65px" height="65px" id="cadnivel"/></div>
-			<div class="menuadm"><img src="imagens/editarniveis.png" title="Editar níveis" width="65px" height="65px" id="editnivel"/></div>
-			<a href="requis.php"><div class="menuadm"><img src="imagens/req.png" title="Enviar requerimento" width="65px" height="65x" id="req"/></div></a>
+			<div class="menuadm"><img src="imagens/cadastrargrupos.png" title="Cadastrar grupos" width="65px" height="65px" id="cadnivel"/></div>
+			<div class="menuadm"><img src="imagens/editargrupos.png" title="Editar grupos" width="65px" height="65px" id="editnivel"/></div>
+			<a href="requis.php"><div class="menuadm"><img src="imagens/req.png" title="Ver requisições" width="65px" height="65x" id="req"/></div></a>
 
 		</div>
 </body>

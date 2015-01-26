@@ -42,6 +42,8 @@ for($i = 0; $i < $_POST['perms']; $i++)
    }
 }
 
-echo "<h1>Permissão alterada com sucesso</h1><br><a href='permissao.php'><li>Voltar</li></a>";
+if (isset($_POST['viaAdm'])) { echo "<h1>Permissão alterada com sucesso</h1><br><a href='permissaoViaAdm.php'><li>Voltar</li></a>"; }
+
+else { echo "<h1>Permissão alterada com sucesso</h1><br><a href='permissao.php'><li>Voltar</li></a>"; }
 
 ?>

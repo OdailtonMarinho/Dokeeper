@@ -49,7 +49,7 @@
 			<a <?php if($_SESSION['nivel'] == 1) { echo "href='./administrador.php'"; }  else { echo  "href='./usuario.php'"; } ?> ><div class="tools" id="lix"><img src="imagens/voltar.png" title="Voltar" height="60px" width="60px"/></div></a>
 		</div>
 		<h2>Requisições</h2>
-			<form id="pesq" action="./requisicao.php" method="POST">
+			<form id="pesq" action="./requis.php" method="POST">
 			
 					
 				Data: <input name="data" type="text" id="calendario" size="8" />
@@ -85,6 +85,7 @@
 		        <!-- <th> </th></pre> -->
 		      	<th>  Autor  </th>
 		      	<th>  Texto  </th>
+		      	<th>  Data  </th>
 		      	<th>  Excluir  </th>
 		      </tr>
 
@@ -100,8 +101,7 @@
 				          	          <td>".$linha['nome']."</td>
 				          	          <td>".$linha['texto']."</td>
 				          	          <td>".$linha['datinha']."</td>
-				          	          <td>".$linha['id']."</td>
-				          	          <td><a href='./requis.php?excluir=".$linha['id']."'>Excluir Solicitação</a></td>
+				          	          <td><a href='./requis.php?excluir=".$linha['id']."'>Excluir Requisição</a></td>
 				          	        </tr>";
 				          }
 

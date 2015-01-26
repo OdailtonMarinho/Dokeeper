@@ -67,7 +67,7 @@
                  	 $tipo = explode(".", $linha['nome']);
                  	 echo "<tr>
                  	           <!--<td><input type='checkbox' name='".$linha['nome']."' value='".$lista['cod']."'/></td>-->
-                 	           <td><a href='..\DAO\Docs\\".$linha['cod']."' target='_blank'>".$linha['nome']."</a></td>
+                 	           <td><a href='baixar.php?cod=".$linha['cod']."' target='_blank'>".$linha['nome']."</a></td>
                  	           <td>".$tipo[count($tipo) - 1]."</td>
                  	           <td><a href='./lixeira.php?recuperar=".$linha['cod']."'>Recuperar Documento</a></td>
                  	           <td>'$linha[datinha]'</td>

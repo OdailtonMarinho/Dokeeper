@@ -28,7 +28,8 @@ for($i = 0; $i < $_POST['perms']; $i++)
       $perm->inserir($_SESSION['cod'], $_POST['ler'.$i], "escrever");
    }
 }
+if (isset($_POST['viaAdm'])) { echo "<h1>Permissão alterada com sucesso</h1><br><a href='permissaoViaAdm.php'><li>Voltar</li></a>"; }
 
-echo "<h1>Permissão alterada com sucesso</h1><br><a href='permissao.php'><li>Voltar</li></a>";
+else { echo "<h1>Permissão alterada com sucesso</h1><br><a href='permissao.php'><li>Voltar</li></a>"; }
 
 ?>

@@ -68,7 +68,7 @@
 						</td>
 					</tr>
 					<tr>
-						<td colspan= "2"><input type="button" value="Enviar nível para a lista" id="entrar" onclick="passarPraListaNiv();" /></td>
+						<td colspan= "2"><input type="button" value="Enviar grupo para a lista" id="entrar" onclick="passarPraListaNiv();" /></td>
 					</tr>
 					<tr>
 						<td>Usuários:</td>
