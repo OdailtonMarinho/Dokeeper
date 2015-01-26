@@ -11,17 +11,39 @@
 
    if(isset($_GET['excluir']))
    {
-   	   echo "entrou";
    	   $del = new DocumentoDAO();
    	   $del->excluir($_GET['excluir'], $_SESSION['cpf']);
-   	   unset($_GET['excluir']);
    	   header("Location: ./usuario.php");
+   }
+
+   if(isset($_GET['texto']))
+   {
+   	   $req = new SolicitacaoDAO();
+   	   if($_GET['texto'] != "")
+   	   {
+   	       $req->adicionar($_GET['texto'], $_SESSION['cpf'], date("y/m/d"));
+   	       echo "<script> alert('Requisição enviada com sucesso')</script>";
+   	   }
+   	   else { echo "<script> alert('O texto enviado não pode ser vazio.')</script>"; }
+   	   echo "<meta http-equiv='refresh' content='2; ./usuario.php'>";
    }
 
 ?>
 
 <html>
 <head>
+
+<SCRIPT LANGUAGE="JavaScript">
+<!-- 
+function textCounter(field, countfield, maxlimit) {
+if (field.value.length > maxlimit)
+field.value = field.value.substring(0, maxlimit);
+else 
+countfield.value = maxlimit - field.value.length;
+}
+// -->
+</script>
+
 	<title>Bem-Vindo!</title>
 	<meta charset="UTF-8"/>
 	<link rel="stylesheet" type="text/css" href="stylesheet.css"/>
@@ -33,6 +55,18 @@
 	<div id="corpo2">
 		<div id="cabecalho">
 			<div class="welcome"><h3>Olá, <?php echo $_SESSION['nome']; ?>.</h3></div>
+
+			<div class="panel5">
+					<h2>Enviar requisição</h2>
+					<form action="./usuario.php" method="GET">
+					<textarea class="ta" rows="7" cols="40" name="texto" wrap="physical" onKeyDown="textCounter(this.form.texto,this.form.remLen,125);" onKeyUp="textCounter(this.form.texto,this.form.remLen,125);"></textarea>
+					<input type="submit" value="Enviar" class="fail" id="entrar1"/>
+					<input readonly type="text" name="remLen" size="3" maxlength="3" value="125">
+					<input type="submit" value="Enviar" class="fail" id="entrar1"/>			
+					
+					</form>
+				</div>
+
 			<div class="panel">
 				<h4>Alterar</h4>
 				<a class="link" href="alteracao.php"><p> Alterar dados</p></a>
@@ -55,7 +89,7 @@
 						</td>
 					</tr>
 					<tr>
-						<td><input type="submit" value="Enviar documento" id="entrar"/></td>
+						<td><input readonly type="text" size="2" maxlength="2" value="100Mb"><input type="submit" value="Enviar documento" id="entrar"/></td>
 						<td><input type="reset" value="Limpar" id="entrar"/><br></td>
 					</tr>
 					</table>
@@ -64,19 +98,21 @@
 
 		<div class="botoeslixeira">
 			<form id="buttondoc">
-				<input id="entrar" type="submit" value="Marcar todos"/>
-				<input id="entrar" type="reset" value="Enviar pra lixeira"/>
+				<!--<input id="entrar" type="submit" value="Marcar todos"/>-->
+				<!--<input id="entrar" type="reset" value="Enviar pra lixeira"/>-->
 			</form>
 		</div>
 		<form enctype="multipart/form-data">
 		<div id="lista" class="lista">
 		   <table>
 		      <tr>
-		        <th> </th></pre>
+		        <!--<th> </th></pre>-->
 		      	<th>  Nome  </th>
 		      	<th>  Tipo  </th>
 		      	<th>  Excluir  </th>
 		      	<th>  Data  </th>
+		      	<th> Sobrescrever </th>
+		      	<?php if($_SESSION['nivel'] != 2) { echo "<th> Permissão </th>"; } ?>
 		      </tr>
 
             <?php 
@@ -87,12 +123,14 @@
                  	 $tipo = explode(".", $linha['nome']);
                  	 if(count($tipo) == 1) { $tipo[count($tipo) - 1] = "-"; }
                  	 echo "<tr>
-                 	           <td><input type='checkbox' name='".$linha['nome']."' value='".$lista['cod']."'/></td>
-                 	           <td><a href='..\DAO\Docs\\".$linha['cod']."' target='_blank'>".$linha['nome']."</a></td>
+                 	           <!--<td><input type='checkbox' name='".$linha['nome']."' value='".$lista['cod']."'/></td>-->
+                 	           <td><a href='baixar.php?cod=".$linha['cod']."' target='_blank'>".$linha['nome']."</a></td>
                  	           <td>".$tipo[count($tipo) - 1]."</td>
                  	           <td><a href='./usuario.php?excluir=".$linha['cod']."'>Excluir Documento</a></td>
                  	           <td>'$linha[datinha]'</td>
-                 	       </tr>";
+                 	           <td><a href='./sobs.php?cod=$linha[cod]&nome=$linha[nome]'>Sobrescrever Documento</a></td>";
+                 	           if($_SESSION['nivel'] != 2) { echo "<td><a href='./permissao.php?cod=".$linha['cod']."'>Alterar Permissão</a></td>"; }
+                 	       echo "</tr>";
 
                  }
 			 ?>
@@ -100,8 +138,9 @@
 		</div>
 		</form>
 			<div id="menuuser">
-			<div class="menuuser"><img src="imagens/adddoc.png" title="Adicionar documentos" width="65px" height="65px" id="adddoc"/></div>
-			<a href="pesquisa.php"><div class="menuuser"><img src="imagens/pesquisar.png" title="Pesquisar" width="65px" height="65px"/></div></a>
+			<div class="menuuser"><img src="imagens/adddoc2.png" title="Adicionar documentos" width="65px" height="65px" id="adddoc"/></div>
+			<a href="pesquisa.php"><div class="menuuser"><img src="imagens/pesquisar2.png" title="Pesquisar" width="65px" height="65px"/></div></a>
+			<div class="menuuser"><img src="imagens/req.png" title="Fazer requisição" width="65px" height="65px" id="req"/></div>
 		</div>
 </body>
 </html>

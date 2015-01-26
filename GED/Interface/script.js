@@ -25,3 +25,30 @@ $(document).ready(function(){
             $('.panel3').slideToggle('slow');
         });
     });
+
+$(document).ready(function(){
+    $('#editnivel').click(function(){
+        $('.panel4').slideToggle('slow');
+    });     
+    $('#entrar').click(function(){
+            $('.panel4').slideToggle('slow');
+        });
+    });
+
+$(document).ready(function(){
+    $('#req').click(function(){
+        $('.panel5').slideToggle('slow');
+    });     
+    $('#req').click(function(){
+            $('#entrar1').slideToggle('slow');
+        });
+    });
+
+$(document).ready(function(){
+    $('.sob').click(function(){
+        $('.panel6').slideToggle('slow');
+    });     
+    $('.sob').click(function(){
+            $('#entrar').slideToggle('slow');
+        });
+    });

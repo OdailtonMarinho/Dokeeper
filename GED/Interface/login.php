@@ -28,7 +28,7 @@ elseif(isset($_SESSION['cpf']) && $_SESSION['nivel'] != 1){ header("Location: ./
 				<div id="login"><h4>Faça login</h4></div>
 				<div id="user">
 					<div class="interno1">Usuário:</div>
-					<div class="interno"><input type="text" name="nome" size="18"/></div>
+					<div class="interno"><input type="email" name="nome" size="18"/></div>
 					<div class="interno1">Senha:</div>
 					<div class="interno"><input type="password" name="senha" size="18"/></div>
 					<?php

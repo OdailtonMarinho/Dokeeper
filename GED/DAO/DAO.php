@@ -32,6 +32,12 @@ class UsuarioDAO {
 		erro($query);
 	}
 
+    function editarNivel($nivel, $cpf)
+	{
+		$query = mysql_query("update usuario set nivel = '$nivel' where cpf = '$cpf';");
+		erro($query);
+	}
+
 	function excluir($cpf) {
 		$querry = mysql_query("delete from usuario where cpf = '$cpf'");
 		erro($querry);
@@ -53,14 +59,14 @@ class UsuarioDAO {
 		erro($query);
 	}
 
-	function listarPorNome($nome, $nivel) {
+	function listarPorNome($nome, $nivel="") {
 		$filtro = "";
 		if($nome != "") 
 		{
 			$filtro .= " and usuario.nome like '%$nome%'";
 		}
 
-		if($nivel != "nulo") { $filtro .= " and usuario.nivel = '$nivel'"; }
+		if($nivel != "nulo" && $nivel != "") { $filtro .= " and usuario.nivel = '$nivel'"; }
 		$querry = mysql_query("select *, nivel.nome as 'Nnome' from usuario, nivel where nivel.Id = usuario.nivel $filtro;");
 		//echo "select *, nivel.nome as 'Nnome' from usuario, nivel where nivel.Id = usuario.nivel $filtro;";
 		erro($querry);
@@ -82,11 +88,11 @@ class DocumentoDAO {
 			$excluido = "true";
 		else 
 			$excluido = "false";
-		$caminho = "C:\\xampp\\htdocs\\GED\\DAO\\Docs\\" . $cod;
+		$caminho = "..\\DAO\\Docs\\" . $cod;
 
 		if (file_exists($nome))
 			echo 	"1";
-		if (is_dir("C:\\xampp\\htdocs\\GED\\DAO\\Docs"))
+		if (is_dir("..\\DAO\\Docs"))
 			echo "2";
 
 		move_uploaded_file($tmpNome, $caminho);
@@ -95,26 +101,23 @@ class DocumentoDAO {
 		echo "insert into documento(cod, nome, dat, caminho, excluido, autor) values('$cod', '$nome', '$data', '$caminho', $excluido, '$autor');";
 	}
 
-	function editar($novo_valor, $cod) {
-	     foreach($novo_valor as $nv) {
-	     	$querry = mysql_query("update documento set '$novo_valor' = '$novo_valor' where cod = '$cod';");
-	     	mysql_error();
-	     }
-
-	     
-    }
 
     function excluir($cod, $cpf) {
-    	$querry = mysql_query("update documento set excluido = true where cod = '$cod' and autor = '$cpf';");
-    	echo "update documento set excluido = true where cod = '$cod' and autor = '$cpf';";
+    	$querry = mysql_query("update documento set excluido = true where cod = '$cod'");
+    	if (!$querry || mysql_affected_rows()==0)
+			die ("update documento set excluido = true where cod = '$cod' and autor = '$cpf';");
     	erro($querry);
+    	
+    	//3- delete from usuario where cpf = ''
+    	//2- delete from documentos where cpf = ''
+    	//1- delete from permissao where cpf = ''
     }
 
     function excluirDeVez($cod) {
     	$querry = mysql_query("delete from documento where cod = '$cod';");
     	//echo "delete from documento where excluido = true and cod = '$cod';";
     	erro($querry);
-    	unlink("C:\\xampp\\htdocs\\GED\\DAO\\Docs\\" . $cod);
+    	unlink("..\\DAO\\Docs\\" . $cod);
     }
 
     function recuperar($cod, $cpf) {
@@ -164,6 +167,21 @@ class DocumentoDAO {
 		if($q) { return $q; }
     }
 
+    function listarDoc($cod)
+    {
+    	$q = mysql_query("select * from documento where cod = '$cod';");
+		if($q) { return $q; }
+    }
+
+    function editar($cod, $data, $nome, $tmpName)
+    {
+    	@unlink("..\\DAO\\Docs\\" . $cod);
+    	@move_uploaded_file($tmpName, "..\\DAO\\Docs\\" . $nome);
+    	@rename("..\\DAO\\Docs\\" . $nome, "..\\DAO\\Docs\\" . $cod);
+    	$q = mysql_query("update documento set nome = '$nome', dat = '$data' where cod = '$cod';");
+    	if($q) { return $q; }
+    }
+
 }
 
 class PermissaoDAO {
@@ -178,6 +196,30 @@ class PermissaoDAO {
 		erro($query);
 	}
 
+	function excluir($id)
+	{
+		$query = mysql_query("delete from permissao where id = '$id';");
+		erro($query);
+	}
+
+	function listar($cpf)
+	{
+		$query = mysql_query("select * from permissao where cpf = '$cpf';");
+		erro($query);
+	}
+
+	function listarPermDoDoc($cod, $autor, $usuario)
+	{
+		$query = mysql_query("select *, permissao.nome as 'perNome', usuario.nome as 'usuNome', documento.nome as 'docNome', permissao.id as 'perId', nivel.Nome as 'nivNome' FROM permissao, usuario, documento, nivel WHERE permissao.cod = '$cod' and permissao.cod = documento.cod and usuario.cpf = permissao.cpf and documento.autor = '$autor' and usuario.nivel = nivel.Id and usuario.nome != '$usuario'");
+		return $query;
+	}
+
+	function apagarAnterior($cpf, $cod)
+	{
+		$query = mysql_query("delete from permissao where cpf = '$cpf' and cod ='$cod';");
+		erro($query);
+	}
+
 }
 
 class NivelDAO {
@@ -188,17 +230,21 @@ class NivelDAO {
 		else return false;
 	}
 
-	function editarNivel(NivelDB $n) {
-		$query = mysql_query("update nivel set nome = '$n->getNome' where id = '$n->getId';");
+	function editar($n, $id) {
+		$query = mysql_query("update nivel set nome = '$n' where id = '$id';");
 		erro($query);
-	}
-
-	function deletarNivel(NivelDB $n) {
-		$query = mysql_query("delete from nivel where id = '$n->getId';");
 	}
 
 	function listarTudo() {
 		$query = mysql_query("select * from nivel;");
+		return $query;
+	}
+
+	function listarPorNome($n="")
+	{
+		$filtro = "";
+		if($n != "") { $filtro .= " and Nome like '%$n%'"; }
+		$query = mysql_query("select * from nivel where Id != 2 $filtro;");
 		return $query;
 	}
 
@@ -207,6 +253,35 @@ class NivelDAO {
 		$query = mysql_query("select * from nivel where Id = '$id';");
 		return $query;
 	}
+}
+
+class SolicitacaoDAO
+{
+	function adicionar($texto, $cpf, $data)
+	{
+		$q = mysql_query("insert into solicitacao (texto, cpf, dat) values('$texto','$cpf', '$data');");
+		if($q) return true;
+		else return false;
+	}
+
+    function excluir($id)
+	{
+		$q = mysql_query("delete from soclicitacao where id = '$id';");
+		if($q) return true;
+		else return false;
+	}
+
+	function listar($cpf="", $data="")
+	{
+		$usu = "";
+		if($cpf != "nulo" && $cpf != "") { $usu .= " and solicitacao.cpf = '$cpf'"; }
+		if($data != "") { $usu .= " and dat = '$data'"; }
+		$q = mysql_query("select *, usuario.cpf as 'usuCpf', solicitacao.cpf as 'solCpf', DATE_FORMAT(dat, '%d/%m/%Y') as datinha from solicitacao, usuario where solicitacao.cpf = usuario.cpf $usu;");
+		echo "select *, usuario.cpf as 'usuCpf', solicitacao.cpf as 'solCpf' from solicitacao, usuario where solicitacao.cpf = usuario.cpf $usu;";
+		if($q) return $q;
+		else return false;
+	}
+
 }
 
 ?>

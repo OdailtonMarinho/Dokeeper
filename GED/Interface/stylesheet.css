@@ -109,6 +109,31 @@
 
 }
 
+#entrar1	{
+	background-color: #00BFFF ;
+	color: white;
+	font-family: calibri;
+	border-radius: 0px;
+	border:solid black;
+}
+#entrar1:hover	{
+	background-color: white;
+	color: #00BFFF;
+
+}
+
+#entrar2	{
+	background-color: #00BFFF ;
+	color: white;
+	font-family: calibri;
+	border-radius: 0px;
+	border:solid black;
+}
+#entrar2:hover	{
+	background-color: white;
+	color: #00BFFF;
+
+}
 /*Tela de usuário*/
 #corpo2	{
 	width: 1008px;
@@ -192,7 +217,7 @@ h3 {
 /*Administrador*/
 
 #menuadm	{
-	width: 500px;
+	width: 650px;
 	height: 65px;
 	margin: auto;
 	text-align: center;
@@ -287,6 +312,17 @@ h3 {
  	color: white;
  }
 
+#listaL	{
+	width: 830px;
+	height: 400px;
+	margin: auto;
+	border-radius: 8px;
+	background-color: white;
+	position: relative;
+	position: left;
+	overflow: scroll;
+	display: list-item;
+}
 
 /*Enviar documentos*/
 
@@ -326,6 +362,61 @@ h3 {
 	text-indent: 30px;
 }
 
+.panel4 {
+	background: #B23AEE;
+    background-size:90% 90%;
+    height:240px;
+    width: 300px;
+	display: none;
+    font-family:Calibri;
+    z-index: 1;
+    text-align: center;
+    position: absolute;
+    margin-top: 160px;
+    margin-left: 354px;
+ }
+ .panel4 h2 {
+ 	text-indent: 10px;
+ }
+
+.panel5 {
+	background: #40E0D0;
+    background-size:90% 90%;
+    height:240px;
+    width: 350px;
+	display: none;
+    font-family:Calibri;
+    z-index: 1;
+    text-align: center;
+    position: absolute;
+    margin-top: 290px;
+    margin-left: 329px;
+}
+.panel5 h2 {
+ 	text-indent: 10px;
+ }
+
+ .ta {
+ 	resize : none;
+ }
+
+ .panel6 {
+	background: #EE6363;
+    background-size:90% 90%;
+    height:200px;
+    width: 370px;
+	display: none;
+    font-family:Calibri;
+    z-index: 1;
+    text-align: center;
+    position: absolute;
+    margin-top: 100px;
+    margin-left: 329px;
+    border-radius: 3%;
+}
+.panel6 h2 {
+ 	text-indent: 10px;
+ }
 /*Pesquisar documentos*/
 
 #pbutton	{
@@ -377,4 +468,9 @@ h3 {
 	margin-right: 25px;
 	background-color: white;
 	border-radius: 8px;
+}
+
+#linksob	{
+	color: skyblue;
+
 }

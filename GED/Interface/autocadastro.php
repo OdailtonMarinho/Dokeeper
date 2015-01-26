@@ -23,16 +23,16 @@
 			   <td><h3>Insira seu nome: </td><td><input name="nome" type="text"></h3></td>
 			</tr>
 			<tr>
-			   <td><h3>Insira seu CPF: </td><td><input name="cpf" type="text"></h3></td>
+			   <td><h3>Insira seu CPF: </td><td><input name="cpf" type="number"></h3></td>
 			</tr>
 			<tr>
-			   <td><h3>Insira seu email: </td><td><input name="email" type="text"> </h3></td>
+			   <td><h3>Insira seu email: </td><td><input name="email" type="email"> </h3></td>
 			</tr>
 			<tr>
-			   <td><h3>Insira sua senha: </td><td><input name="senha" type="password"></h3></td>
+			   <td><h3>Insira sua senha: </td><td><input name="senha" type="password"></h3>O tamanho mínimo da senha é de 6 caracteres</td>
 			</tr>
 			<tr>
-			   <td><h3>Repita sua senha: </td><td><input name="senha" type="password"></h3></td>
+			   <td><h3>Repita sua senha: </td><td><input name="repetirSenha" type="password"></h3></td>
 			</tr>
 			</table>
 			<center><input type="submit" value="Cadastrar" id="entrar"/>

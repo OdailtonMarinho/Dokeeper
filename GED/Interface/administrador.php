@@ -31,6 +31,24 @@
    	   $_SESSION['cadastrado'] = 2;
    	   unset($_SESSION['cadastrado']);
    }
+
+   elseif(isset($_GET['idNivel']) && isset($_GET['novoNome']))
+   {
+   	   $niv = new NivelDAO();
+   	   if($_GET['novoNome'] != "" && $_GET['idNivel'] != "nulo")
+   	   {
+   	   		$niv->editar($_GET['novoNome'], $_GET['idNivel']);
+   	        echo "<script type='text/javascript'>alert('Alterado com sucesso!')</script>";
+   	   }
+
+   	   elseif($_GET['idNivel'] == "nulo")
+   	   {
+   	   	  echo "<script type='text/javascript'>alert('Impossivel alterar. Selecione um nível!')</script>";
+   	   }
+
+   	   else echo "<script type='text/javascript'>alert('Impossivel alterar. Novo nome vazio!')</script>";
+   	   echo "<meta http-equiv='refresh' content='2; ./administrador.php'>";
+   }
    
 
 ?>
@@ -59,6 +77,39 @@
 			<a href="lixeira.php"><div class="tools" id="lix"><img src="imagens/lixeira.png" title="Lixeira" height="60px" width="60px"/></div></a>
 		</div>
 		<h2>Seus documentos</h2>
+			<div class="panel4">
+					<h2>Editar níveis</h2>
+					<form action="./administrador.php" method="GET">
+					<table  id="tabela2" style="text-align: right"  CELLPADDING="10" >
+						<tr>
+							<td>Selecionar nível:</td>
+							<td>
+								<select name="idNivel">
+									<option value="nulo">-------------</option>
+									<?php
+
+									   $niv = new NivelDAO();
+									   $q = $niv->listarTudo();
+									   while ($linha = mysql_fetch_assoc($q))
+									   {
+									   	   echo "<option value=".$linha['Id'].">".$linha['Nome']."</option>";
+									   }
+
+									 ?>
+								</select>
+							</td>
+						</tr>
+						<tr>
+							<td>Novo nome:</td>
+							<td><input type="text" size="15"/ name="novoNome"></td>
+						</tr>
+						<tr>
+							<!--<td><input type="submit" value="Excluir" id="entrar"/></td>-->
+							<td><input type="submit" value="Alterar" id="entrar"></td>
+						</tr>
+					</table>
+					</form>
+				</div>
 
 			<div class="panel3">
 					<h2>Enviar documento</h2>
@@ -70,7 +121,7 @@
 						</td>
 					</tr>
 					<tr>
-						<td><input type="submit" value="Enviar documento" id="entrar"/></td>
+						<td><input readonly type="text" size="2" maxlength="2" value="100Mb"> <input type="submit" value="Enviar documento" id="entrar"/></td>
 						<td><input type="reset" value="Limpar" id="entrar"/><br></td>
 					</tr>
 					</table>
@@ -96,18 +147,20 @@
 
 		<div class="botoeslixeira">
 			<form id="buttondoc">
-				<input id="entrar" type="submit" value="Marcar todos"/>
-				<input id="entrar" type="reset" value="Enviar pra lixeira"/>
+				<!--<input id="entrar" type="submit" value="Marcar todos"/>-->
+				<!--<input id="entrar" type="reset" value="Enviar pra lixeira"/>-->
 			</form>
 		</div>
 		<div id="lista" class="lista">
 		   <table>
 		      <tr>
-		        <th> </th>
+		        <!--<th> </th>-->
 		      	<th>  Nome  </th>
 		      	<th>  Tipo  </th>
 		      	<th>  Excluir  </th>
 		      	<th>  Data  </th>
+		      	<th> Permissão </th>
+		      	<th> Sobrescrever </th>
 		      </tr>
 
             <?php 
@@ -117,14 +170,16 @@
                  {
                  	 $tipo = explode(".", $linha['nome']);
                  	 if(count($tipo) == 1) { $tipo[count($tipo) - 1] = "-"; }
+                 	 $cod = $linha['cod'];
                  	 echo "<tr>
-                 	           <td><input type='checkbox' name='".$linha['nome']."' value='".$lista['cod']."'/></td>
-                 	           <td><a href='..\DAO\Docs\\".$linha['cod']."' target='_blank'>".$linha['nome']."</a></td>
+                 	           <!--<td><input type='checkbox' name='".$linha['nome']."' value='".$lista['cod']."'/></td>-->
+                 	           <td><a href='baixar.php?cod=".$linha['cod']."' target='_blank'>".$linha['nome']."</a></td>
                  	           <td>".$tipo[count($tipo) - 1]."</td>
                  	           <td><a href='./administrador.php?excluir=".$linha['cod']."'>Excluir Documento</a></td>
                  	           <td>'$linha[datinha]'</td>
+                 	           <td><a href='./permissao.php?cod=".$linha['cod']."'>Alterar Permissão</a></td>
+                 	           <td><a href='sobs.php?cod=$cod&nome=".$linha['nome']."'>Sobrescrever Documento</a></td>
                  	       </tr>";
-
                  }
 			 ?>
 			 </table>
@@ -136,11 +191,10 @@
 			<a href="pesquisa.php"><div class="menuuser"><img src="imagens/pesquisar.png" title="Pesquisar" width="65px" height="65px"/></div></a>
 			<a href="cadastro.php"><div class="menuadm"><img src="imagens/cadastro.png" title="Cadastrar usuários" width="65px" height="65px"/></div></a>
 			<a href="editarUsuario.php"><div class="menuadm"><img src="imagens/editarUsuario.png" title="Editar usuários" width="65px" height="65px"/></div></a>
-			<div class="menuadm">
-				
-			<img src="imagens/editar.png" title="Cadastrar níveis" width="65px" height="65px" id="cadnivel"/></div>
+			<div class="menuadm"><img src="imagens/editar.png" title="Cadastrar níveis" width="65px" height="65px" id="cadnivel"/></div>
+			<div class="menuadm"><img src="imagens/editarniveis.png" title="Editar níveis" width="65px" height="65px" id="editnivel"/></div>
+			<a href="requisicao.php"><div class="menuadm"><img src="imagens/req.png" title="Enviar requerimento" width="65px" height="65x" id="req"/></div></a>
 
-
-	</div>
+		</div>
 </body>
 </html>

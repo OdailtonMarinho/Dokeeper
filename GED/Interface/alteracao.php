@@ -1,29 +1,12 @@
 <!DOCTYPE html>
 
-<?php 
-   
+<?php
+
    @include("db_conect.inc");
    @include("..\DAO\DAO.php");
    @include("..\DAO\DB.php"); 
 
    session_start();
-   if(!isset($_SESSION['cpf'])) { header("Location: login.php"); }
-
-
-   if(isset($_POST['nome']) && isset($_POST['email']) && $_POST['senha'] == $_POST['repetirSenha'])
-   {
-      $usu = new UsuarioDAO();
-      $usu->editar($_POST['nome'], $_POST['email'], $_SESSION['cpf']);
-      $_SESSION['nome'] = $_POST['nome'];
-
-      if($_POST['senha'] != "" && $_POST['repetirSenha'] != "" && $_POST['senha'] == $_POST['repetirSenha'])
-      {
-	      $usu->editarSenha($_POST['senha'], $_SESSION['cpf']);
-      }
-
-      if($_SESSION['nivel'] == 1) { header("Location: ./administrador.php"); }
-      else header("Location: ./usuario.php");
-  }
 
 ?>
 
@@ -57,10 +40,10 @@
                 	$e = $linha['email'];
                 }
 
-		    echo "<table>
-		    <form action='./alteracao.php' method='POST'>
-			<tr><td><h3>Alterar Nome: </td><td><input name='nome' value=".$n." type='text'></h3></br></td></tr>
-			<tr><td><h3>Alterar Email: </td><td><input name='email' value=".$e." type='text'> </h3></br></td></tr>
+		    echo "<form action='./alterarViaAdm.php' method='POST'>
+			<table>
+		    <tr><td><h3>Alterar Nome: </td><td><input name='nome' value=".$n." type='text'></h3></br></td></tr>
+			<tr><td><h3>Alterar Email: </td><td><input name='email' value=".$e." type='email'> </h3></br></td></tr>
 			<tr><td><h3>Nova Senha: </td><td><input name='senha' value='' type='password'></h3></br></td></tr>
 			<tr><td><h3>Repetir Senha: </td><td><input name='repetirSenha' value='' type='password'></h3></td></tr>
 			</table>

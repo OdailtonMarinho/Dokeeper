@@ -44,15 +44,14 @@
 		<h2 class="h2lixeira">Lixeira</h2>
 		<div class="botoeslixeira">
 			<form id="buttonlixeira">
-				<input id="entrar" type="submit" value="Marcar todos"/>
-				<input id="entrar" type="reset" value="Excluir"/>
-				<input id="entrar" type="submit" value="Recuperar"/>
+				<!--<input id="entrar" type="submit" value="Marcar todos"/>-->
+				<!--<input id="entrar" type="reset" value="Excluir"/>-->
+				<!--<input id="entrar" type="submit" value="Recuperar"/>-->
 			</form>
 		</div>
-		<div id="lista">
+		<div id="listaL">
 		   <table>
 		      <tr>
-		        <th> </th></pre>
 		      	<th>  Nome  </th>
 		      	<th>  Tipo  </th>
 		      	<th>  Recuperar  </th>
@@ -67,7 +66,7 @@
                  {
                  	 $tipo = explode(".", $linha['nome']);
                  	 echo "<tr>
-                 	           <td><input type='checkbox' name='".$linha['nome']."' value='".$lista['cod']."'/></td>
+                 	           <!--<td><input type='checkbox' name='".$linha['nome']."' value='".$lista['cod']."'/></td>-->
                  	           <td><a href='..\DAO\Docs\\".$linha['cod']."' target='_blank'>".$linha['nome']."</a></td>
                  	           <td>".$tipo[count($tipo) - 1]."</td>
                  	           <td><a href='./lixeira.php?recuperar=".$linha['cod']."'>Recuperar Documento</a></td>

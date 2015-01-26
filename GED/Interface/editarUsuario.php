@@ -77,7 +77,9 @@
 			<tr><td><h3>Nova Senha: </td><td><input name='senha' value='' type='password'></h3></br></td></tr>
 			<tr><td><h3>Repetir Senha: </td><td><input name='repetirSenha' value='' type='password'></h3></td></tr>
 			<tr><td><center><input type='submit' value='Confirmar' id='entrar'/></center></td>
+			<input type='hidden' value=".$_GET['selUsu']." name='viaAdm'/>
 			    <td><center><a href='editarUsuario.php?excluir='".$_GET['selUsu']."'> Excluir Usuário</a></center></td>
+
 			</tr>";
 
 		    }
@@ -102,7 +104,7 @@
                    <tr>
                    <td colspan="2" align="center"><label for="jogarNoNivel"> Colocar Usuário no Nivel</label>
                    <select id='jogarNoNivel' name="jogarNoNivel">
-                   	  <option value=''> --- </option>
+                   	  <option value='nulo'> --- </option>
                    	  <?php 
 
                    	      $niveis = new NivelDAO();
@@ -130,13 +132,12 @@
 		      	                    <th> CPF </th>
 		      	                    <th> Email </th>
 		      						<th> Nivel </th>
-		      						<th> Documentos </th>
-		      						<th> Selecionar </th>
-		      						<th> Excluir </th>
+		      						<th> Ver </th>
 		      					  </tr>";
 
                    	       $usu = new UsuarioDAO();
-                   	       $q = $usu->listarPorNome($_POST['listarUsuarios'], $_POST['listarNivel']);
+                   	       if (isset($_POST['listarUsuarios']) && isset($_POST['listarNivel'])) $q = $usu->listarPorNome($_POST['listarUsuarios'], $_POST['listarNivel']);
+                   	       else $q = $usu->listarPorNome("", "");
                    	       while ($linha = mysql_fetch_assoc($q))
                    	       {
                    	       	   echo "<tr>
@@ -144,14 +145,12 @@
                    	      	            <td>".$linha['cpf']."</td>
                    	      	            <td>".$linha['email']."</td>
                    	      	            <td>".$linha['Nnome']."</td>
-                   	      	            <td><a href='./editarUsuario.php?verDocs=".$linha['cpf']."'>Ver Documentos</a></td>
-                   	      	            <td><a href='./editarUsuario.php?selUsu=".$linha['cpf']."'>Selecionar Usuário</a></td>
-                   	      	            <td><a href='./editarUsuario.php?excUsu=".$linha['cpf']."'>Excluir Usuário</a></td>
+                   	      	            <td><a href='./editarUsuario.php?selUsu=".$linha['cpf']."'>Ver Usuário</a></td>
                    	      	         </tr>";
                    	       }
                    	   }
 
-                   	   elseif(isset($_GET['verDocs'])) 
+                   	   elseif(isset($_GET['selUsu'])) 
                    	   {
                    	   	   echo"<table>
                    	   	         <tr>
@@ -159,7 +158,7 @@
                    	   	           <th> Excluir </th>
                    	   	         </tr>";
                    	   	   $doc = new DocumentoDAO();
-                   	       $q = $doc->listarPorAutor($_GET['verDocs']);
+                   	       $q = $doc->listarPorAutor($_GET['selUsu']);
                    	       while ($linha = mysql_fetch_assoc($q))
                    	       {
                    	       	   echo "<tr>
@@ -167,7 +166,6 @@
                    	      	            <td><a href='./editarUsuario.php?excluir=".$linha['cod']."'>Excluir Documento</a></td>
                    	      	         </tr>";
                    	       }
-                   	       unset($_GET['verDocs']);
                    	   }
 
                    	   elseif(isset($_GET['excUsu']))

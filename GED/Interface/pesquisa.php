@@ -116,7 +116,7 @@
 		      	<th>  Nome  </th>
 		      	<th>  Tipo  </th>
 		      	<th>  Data  </th>
-		      	<th>  Editar  </th>
+		      	<th> Sobrescrever </th>
 		      	<?php if($_SESSION['nivel'] != 2) { echo "<th>  Autor  </th>"; } ?>
 		      </tr>
 
@@ -137,16 +137,16 @@
 				          	   {
 				          	         echo "<tr>
                  	                           <!-- <td><input type='checkbox' name='".$linha['nome']."' value='".$linha['cod']."'/></td> -->
-                 	                           <td><a href='..\DAO\Docs\\".$linha['cod']."' target='_blank'>".$linha['nome']."</a></td>
+                 	                           <td><a href='baixar.php?cod=".$linha['cod']."' target='_blank'>".$linha['nome']."</a></td>
                  	                           <td>".$tipo[count($tipo) - 1]."</td>
                  	                           <td>'$linha[datinha]'</td>";
                  	                 if($_SESSION['nivel'] == 2)
                  	                 {
-                 	                 	 echo "<td><a href=''>Sobrescerver Documento</a></td>"; 
+                 	                 	 echo "<td><a href='sobs.php?cod=$".$linha['cod']."&nome=".$linha['nome']."'>Sobrescrever Documento</a></td>";
                  	                 }
                  	                 elseif($linha['perNome'] == 'escrever') 
                  	                 { 
-                 	                 		echo "<td><a href=''>Sobrescerver Documento</a></td>"; 
+                 	                 		echo "<td><a href='./sobs.php?cod=".$linha['cod']."&nome=".$linha['nome']."'>Sobrescrever Documento</a></td>";
                  	                 }
                  	                 else { echo "<td>Somente leitura</td>"; }
                  	                 if($_SESSION['nivel'] != 2)
