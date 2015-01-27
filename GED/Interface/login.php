@@ -33,7 +33,7 @@ session_start();
 	require("db_conect.inc.php");
     if(isset($_SESSION['cpf']))
     {
-    	if($_SESSION['nivel'] == "adm") { header("Location: ./administrador.php"); }
+    	if($_SESSION['nivel'] == "1") { header("Location: ./administrador.php"); }
     	else { header("Location: ./usuario.php"); }
     }
 

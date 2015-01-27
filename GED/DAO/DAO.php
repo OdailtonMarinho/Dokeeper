@@ -131,20 +131,20 @@ class DocumentoDAO {
     	if($nome != "") { $filtro .= " and documento.nome LIKE '%$nome%'"; } 
     	if($autor != "" && $autor != 'nulo') { $filtro .= " and documento.autor = '$autor'"; }
 
-    	$querry = mysql_query("select permissao.cod as 'cod', documento.nome as 'nome', documento.autor as 'autor', DATE_FORMAT(dat, '%d/%m/%Y') as datinha, permissao.nome as 'perNome' from permissao, documento, usuario where permissao.cpf = '$cpf' and (permissao.nome = 'ler' or permissao.nome = 'escrever') and permissao.cod = documento.cod and usuario.cpf = permissao.cpf and excluido = 0 $filtro;");
+    	$querry = mysql_query("select permissao.cod as 'cod', documento.nome as 'nome', documento.autor as 'autor', DATE_FORMAT(dat, '%d/%m/%Y') as datinha, permissao.nome as 'perNome' from permissao, documento, usuario where permissao.cpf = '$cpf' and (permissao.nome = 'ler' or permissao.nome = 'escrever') and permissao.cod = documento.cod and usuario.cpf = permissao.cpf and excluido = 0 $filtro order by documento.nome;");
 		//echo "select permissao.cod as 'cod', documento.nome as 'nome', documento.autor as 'autor', DATE_FORMAT(dat, '%d/%m/%Y') as datinha, permissao.nome as 'perNome' from permissao, documento, usuario where permissao.cpf = '$cpf' and (permissao.nome = 'ler' or permissao.nome = 'escrever') and permissao.cod = documento.cod and usuario.cpf = permissao.cpf and excluido = 0 $filtro;";
 		erro($querry);
 		if($querry) { return $querry; }
     }
 
     function listarPorAutor($cpf) {
-    	$querry = mysql_query("select *, DATE_FORMAT(dat, '%d/%m/%Y') as datinha from documento where autor = '$cpf' and excluido = false;");
+    	$querry = mysql_query("select *, DATE_FORMAT(dat, '%d/%m/%Y') as datinha from documento where autor = '$cpf' and excluido = false order by nome;");
 		erro($querry);
 		if($querry) { return $querry; }
     }
 
     function listarExcluidosAutor($cpf) {
-    	$querry = mysql_query("select *, DATE_FORMAT(dat, '%d/%m/%Y') as datinha from documento where autor = '$cpf' and excluido = true;");
+    	$querry = mysql_query("select *, DATE_FORMAT(dat, '%d/%m/%Y') as datinha from documento where autor = '$cpf' and excluido = true order by nome;");
 		erro($querry);
 		if($querry) { return $querry; }
     }
@@ -154,7 +154,7 @@ class DocumentoDAO {
     	$filtro = "";
     	if($data != "") { $filtro .= " and DATE_FORMAT(dat, '%d/%m/%Y') = '$data'"; }
     	if($nome != "") { $filtro .= " and nome LIKE '%$nome%'"; } 
-    	$querry = mysql_query("select *, DATE_FORMAT(dat, '%d/%m/%Y') as datinha from documento where autor = '$cpf' $filtro;");
+    	$querry = mysql_query("select *, DATE_FORMAT(dat, '%d/%m/%Y') as datinha from documento where autor = '$cpf' $filtro order by nome;");
     	//echo "select *, DATE_FORMAT(dat, '%d/%m/%Y') as datinha from documento where autor = '$cpf' $filtro;";
 		erro($querry);
 		if($querry) { return $querry; }
@@ -236,7 +236,7 @@ class NivelDAO {
 	}
 
 	function listarTudo() {
-		$query = mysql_query("select * from nivel;");
+		$query = mysql_query("select * from nivel order by nome;");
 		return $query;
 	}
 
@@ -244,13 +244,13 @@ class NivelDAO {
 	{
 		$filtro = "";
 		if($n != "") { $filtro .= " and Nome like '%$n%'"; }
-		$query = mysql_query("select * from nivel where Id != 2 $filtro;");
+		$query = mysql_query("select * from nivel where Id != 2 $filtro order by nome;");
 		return $query;
 	}
 
 	function listarPorId($id)
 	{
-		$query = mysql_query("select * from nivel where Id = '$id';");
+		$query = mysql_query("select * from nivel where Id = '$id' order by nome;");
 		return $query;
 	}
 }
@@ -276,7 +276,7 @@ class SolicitacaoDAO
 		$usu = "";
 		if($cpf != "nulo" && $cpf != "") { $usu .= " and solicitacao.cpf = '$cpf'"; }
 		if($data != "") { $usu .= " and DATE_FORMAT(dat, '%d/%m/%Y') = '$data'"; }
-		$q = mysql_query("select *, usuario.cpf as 'usuCpf', solicitacao.cpf as 'solCpf', DATE_FORMAT(dat, '%d/%m/%Y') as datinha from solicitacao, usuario where solicitacao.cpf = usuario.cpf $usu;");
+		$q = mysql_query("select *, usuario.cpf as 'usuCpf', solicitacao.cpf as 'solCpf', DATE_FORMAT(dat, '%d/%m/%Y') as datinha from solicitacao, usuario where solicitacao.cpf = usuario.cpf $usu order by usuario.nome;");
 		//echo "select *, usuario.cpf as 'usuCpf', solicitacao.cpf as 'solCpf', DATE_FORMAT(dat, '%d/%m/%Y') as datinha from solicitacao, usuario where solicitacao.cpf = usuario.cpf $usu;";
 		if($q) return $q;
 		else return false;
